@@ -47,7 +47,7 @@ async function sendMessage(data) {
       reportEmojisCreatedYesterday(data)
     } else if(data.content.includes(' all')) {
       reportAllEmoji(data)
-    } else if(data.content.includes(' help')) {
+    } else {
       getHelp(data)
     }
 }
@@ -56,7 +56,7 @@ async function sendMessage(data) {
 function getHelp(data) {
     bot.postMessageToChannel(
         getChannelNameToReply(data),
-        `【コマンド一覧】\nwhatsnew: 昨日に追加された絵文字を確認します\nhelp : ヘルプ情報を表示します`,
+        `【コマンド一覧】\nwhatsnew: 昨日に追加された絵文字を確認します\nall: 追加されたすべての絵文字を確認します\nhelp : ヘルプ情報を表示します`,
         PARAMS
     );
 }
