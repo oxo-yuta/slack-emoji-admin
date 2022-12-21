@@ -53,7 +53,7 @@ async function sendMessage(data) {
 }
 
 // help情報投稿処理
-function getHelp() {
+function getHelp(data) {
     bot.postMessageToChannel(
         getChannelNameToReply(data)
         `【コマンド一覧】\nwhatsnew: 昨日に追加された絵文字を確認します\nhelp : ヘルプ情報を表示します`,
