@@ -4,7 +4,18 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config();
 
-// URL(天気)・Slackチャンネル情報の定義
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
+
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+
 // SLACK_CHANELは、Slack上に存在するチャンネル(例: general)を指定
 const APP_NAME = 'emoji_admin';
 const SLACK_CHANEL = 'okuzono-lab-pub';
@@ -15,14 +26,6 @@ const bot = new SlackBot({
     token: `${process.env.BOT_TOKEN}`,  // .envファイルのトークンを参照
     name: APP_NAME
 });
-
-
-bot.getChannels().then(data=> {
-  console.log('=-=-=-=-=-=')
-  data.channels.map(ch => {
-    console.log(ch.name)
-  })
-})
 
 // Slackでのメッセージ投稿の際の処理
 bot.on('message', (data) => {
